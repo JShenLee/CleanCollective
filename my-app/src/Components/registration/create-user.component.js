@@ -5,8 +5,6 @@ import axios from "axios";
 import UserForm from "./UserForm";
 import { useNavigate } from "react-router-dom";
 
-
-
 // CreateStudent Component
 const CreateUser = () => {
   const navigate = useNavigate();
