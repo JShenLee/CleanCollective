@@ -1,0 +1,27 @@
+.login_links{
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+
+}
+
+.form-control{
+    margin-top: 10px;
+}
+
+p, .register_link{
+    margin-right: 30px;
+    
+}
+
+.first_header{
+    text-align: center;
+}
+
+.button_login{
+    margin: 20px;
+   text-align: center;
+   
+}
+
