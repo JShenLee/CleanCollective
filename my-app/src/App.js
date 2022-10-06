@@ -20,6 +20,9 @@ import LandingPage from "./Components/landingPage";
 import ConfirmEmail from "./Components/registration/confirm-email.component";
 import RegisterPage from "./Components/registration/create-user.component";
 
+//Form
+import CreateForm from "./Components/Form/create-form.component";
+
 // App Component
 const App = () => {
   return (
@@ -42,6 +45,7 @@ const App = () => {
                     path="/register/confirmEmail"
                     element={<ConfirmEmail />}
                   />
+                  <Route path="/createForm" element={<CreateForm />} />
                 </Routes>
               </div>
             </Col>
