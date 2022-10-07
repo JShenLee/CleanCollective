@@ -9,9 +9,7 @@ const UserLogoutButton = () => { return (
     <Formik>
         <form>
         <Button>
-        size="lg"
-        block="block"
-        type="submit"
+            Logout
         </Button>
 
         </form>

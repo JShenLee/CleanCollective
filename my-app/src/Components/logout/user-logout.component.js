@@ -37,7 +37,7 @@ const UserLogoutComponent = () => {
       onSubmit={onSubmit}
       enableReinitialize
     >
-      Logout
+     
     </UserLogoutButton>
   );
 };

@@ -19,7 +19,7 @@ import UserLoginForm from "./Components/Login/user-login-form.component";
 import LandingPage from "./Components/landingPage";
 import ConfirmEmail from "./Components/registration/confirm-email.component";
 import RegisterPage from "./Components/registration/create-user.component";
-import UserLogoutButton from "./Components/logout/logout-user";
+import UserLogoutButton from "./Components/logout/user-logout.component";
 
 // App Component
 const App = () => {
@@ -39,7 +39,7 @@ const App = () => {
                   <Route path="/create-user" element={<CreateUser />} />
                   <Route path="/login" element={<UserLoginForm />} />
                   <Route path="/register" element={<RegisterPage />} />
-                   
+                  <Route path="/forumPage" element={<UserLogoutButton />} />
                   <Route
                     path="/register/confirmEmail"
                     element={<ConfirmEmail />}
