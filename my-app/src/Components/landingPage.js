@@ -31,6 +31,9 @@ getUser();
             {data?<h2>_id: {data._id} </h2>: null}
             {data?<h2>email: {data.email} </h2>: null}
             {data?<h2>createdAt: {data.createdAt} </h2>: null}
+
+
+            
                 <img className='bigLogo' src={logo}/>
                 <h3>Join Clean Collective</h3>
                 <p>Get more features and privileges by joining the most helpful community</p>
