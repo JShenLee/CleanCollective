@@ -7,28 +7,17 @@ export const CreateForm = () => {
   // we can access the states data with the contact variable.
   // WE can change the state using the setContacts function
   const [contacts, setContacts] = useState(data);
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Phone Number</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/*as the map functions iterates through the array of data it allows us to access each object through the contact variable */}
+    <div>
+      {/*as the map functions iterates through the array of data it allows us to access each object through the contact variable */}
+
+      <select name="cars" id="cars">
         {contacts.map((contact) => (
-          <tr>
-            <td>{contact.fullName}</td>
-            <td>{contact.address}</td>
-            <td>{contact.phoneNumber}</td>
-            <td>{contact.email}</td>
-          </tr>
+          <option value="volvo">{contact.fullName}</option>
         ))}
-      </tbody>
-    </table>
+      </select>
+    </div>
   );
 };
 
