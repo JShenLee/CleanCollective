@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserLogoutButton from "./logout-user";
 import { Navigate, useNavigate } from "react-router-dom";
+
 // LOGOUT Component
 const UserLogoutComponent = () => {
   const navigate = useNavigate();
@@ -14,23 +15,22 @@ const UserLogoutComponent = () => {
 //on click 
   const onSubmit = (userObject) => {
     axios({
-    //   method: "POST",
-    //   data: {
-    //     username: userObject.login_email_feild, 
-    //     password: userObject.login_password_feild,
-    //   },
-    //   withCredentials: false,
-    //   url: "http://localhost:5000/user/login",
-   // userObject.DESTROY();
+    
+      method: "POST",
+      data: userObject.false,
+      withCredentials: false,
+      url: "http://localhost:5000/user/login",
+       //DESTROY(userObject);
     })
     .then((res) => {
-      res = "logged out";
-      console.log(res);
+      
+      res.send("logged out")
+      console.log("logged out");
     })
     .catch((err) => alert("Somthing went wrong "));
   };
 
-  // Return student form
+  
   return (
     <UserLogoutButton
       initialValues={formValues}
@@ -42,5 +42,5 @@ const UserLogoutComponent = () => {
   );
 };
 
-// Export CreateStudent Component
+// Export Component
 export default UserLogoutComponent;
