@@ -75,7 +75,7 @@ router.route('/getUserPosts/:id').get((req, res) => {
 
 router.route('/getUserLikedPosts/:userId').get((req, res) => {
   User.UserCollection.findById(req.params.userId)
-  .then(user => res.json(user.likedPosts))
+  .then(user => res.send(user.likedPosts))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 

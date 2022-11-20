@@ -43,7 +43,6 @@ export class PostPage extends Component {
     
   }
 
-  
 
   getAllUserPost = () => {
     axios({
