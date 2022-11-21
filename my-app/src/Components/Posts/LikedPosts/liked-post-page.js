@@ -4,9 +4,6 @@ import axios from "axios";
 import SearchBar from "../SearchBar"
 import { ReactSession }  from 'react-client-session';
 
-const userSession = ReactSession.get('userSession')
-let userId = userSession._id
-
 export class PostPage extends Component {
   state = {
     postUserName: "",
@@ -15,7 +12,8 @@ export class PostPage extends Component {
     posts: [],
     search: [],
     searched: '',
-    likes: []
+    likes: [],
+    likedPosts: []
   };
 
   getSearched = () => {
@@ -31,9 +29,11 @@ export class PostPage extends Component {
 
   // Get the User Post Data when the component mounts (onload function)
   componentDidMount = () => {
+      this.setState({ likedPosts: [] })
       this.getAllUserPost();
       this.getSearched();
       // console.log(userId)
+      
       this.getLikedPosts();
     // this.displayUserPost();
   };
@@ -63,6 +63,8 @@ export class PostPage extends Component {
   };
 
   getLikedPosts = () => {
+    const userSession = ReactSession.get('userSession')
+    let userId = userSession._id;
     axios({
       method: "GET",
       url: "http://localhost:5000/user.post.route/getUserLikedPosts/" + userId,
@@ -70,21 +72,39 @@ export class PostPage extends Component {
       .then((response) => {
         const data = response.data;
         this.setState({ likes: data });
-        // console.log("User post data pulled from DB");
+        data.map((liked) => {
+          axios({
+            method: "GET",
+            url: "http://localhost:5000/user.post.route/getPost/" + liked,
+          })
+            .then((response) => {
+              this.setState({ likedPosts: [...this.state.likedPosts, response.data] });
+              console.log(this.state.likedPosts)
+            })
+            .catch((err) => {
+              alert("Error pulling user post data");
+            });
+        })
+
       })
       .catch((err) => {
         alert("Error pulling user post data");
       });
-      console.log(this.state.likes);
+      // console.log(this.state.likes);
+
+    
   }
 
 
   render() {
+
     return (
-    this.state.likes.map((liked) => {
-      this.state.posts.map((post) => {
-        if (liked === post.postTitle) {
-            <PostCard
+      <div>
+          <SearchBar />
+          {
+            this.state.searched ? this.state.search.reverse().map((post) => (
+
+              <PostCard
                 id={post._id}
                 username={post.postUserName}
                 title={post.postTitle}
@@ -92,40 +112,22 @@ export class PostPage extends Component {
                 likes={post.postLikes}
                 key={post._id}
               />
-        }
-      })
-    }))
-  
-    // return (
-    //   <div>
-    //       <SearchBar />
-    //       {
-    //         this.state.searched ? this.state.search.reverse().map((post) => (
-
-    //           <PostCard
-    //             id={post._id}
-    //             username={post.postUserName}
-    //             title={post.postTitle}
-    //             body={post.postBody}
-    //             likes={post.postLikes}
-    //             key={post._id}
-    //           />
-    //         )) : this.state.posts.reverse().map((post) => (
+            )) : this.state.likedPosts.reverse().map((post) => (
               
-    //           <PostCard
-    //             id={post._id}
-    //             username={post.postUserName}
-    //             title={post.postTitle}
-    //             body={post.postBody}
-    //             likes={post.postLikes}
-    //             createdAt={post.createdAt}
-    //             key={post._id}
-    //           />
+              <PostCard
+                id={post._id}
+                username={post.postUserName}
+                title={post.postTitle}
+                body={post.postBody}
+                likes={post.postLikes}
+                createdAt={post.createdAt}
+                key={post._id}
+              />
 
-    //         ))
-    //       }
-    //   </div>
-    // );
+            ))
+          }
+      </div>
+    );
 
   }
 }

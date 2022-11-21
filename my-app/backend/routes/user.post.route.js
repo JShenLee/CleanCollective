@@ -79,6 +79,7 @@ router.route('/getUserLikedPosts/:userId').get((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
 router.route('/getUserSavedPosts/:userId').get((req, res) => {
   User.UserCollection.findById(req.params.userId)
   .then(user => res.json(user.savedPosts))
