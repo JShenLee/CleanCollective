@@ -16,34 +16,34 @@ export class PostPage extends Component {
     likedPosts: []
   };
 
-  getSearched = () => {
-      // const post = axios.get('http://localhost:5000/user.post.route/searchPost/' + searched.postTitle);
-      if (this.state.posts) {
-      this.state.posts.map((post) => {
-        if (post.postTitle === this.state.searched) {
-          this.state.search.push(post);
-        }
-      })
-    }
-  }
+  // getSearched = () => {
+  //   console.log("Hello search");
+  //     // const post = axios.get('http://localhost:5000/user.post.route/searchPost/' + searched.postTitle);
+  //     if (this.state.posts) {
+  //     this.state.posts.map((post) => {
+  //       if (post.postTitle === this.state.searched) {
+  //         this.state.search.push(post);
+  //       }
+  //     })
+  //   }
+  // }
 
   // Get the User Post Data when the component mounts (onload function)
   componentDidMount = () => {
+    // this.getAllUserPost();
+    this.getLikedPosts();
       this.setState({ likedPosts: [] })
-      this.getAllUserPost();
-      this.getSearched();
+      // this.getSearched();
       // console.log(userId)
-      
-      this.getLikedPosts();
     // this.displayUserPost();
   };
 
-  componentDidUpdate = () => {
-    this.state.search = [];
-    this.getAllUserPost();
-    this.state.searched = ReactSession.get('searchedValue')
-    this.getSearched();
-  }
+  // componentDidUpdate = () => {
+  //   this.getAllUserPost();
+  //   this.state.search = [];
+  //   this.state.searched = ReactSession.get('searchedValue')
+  //   this.getSearched();
+  // }
 
   
 
@@ -70,16 +70,17 @@ export class PostPage extends Component {
       url: "http://localhost:5000/user.post.route/getUserLikedPosts/" + userId,
     })
       .then((response) => {
+        
         const data = response.data;
         this.setState({ likes: data });
-        data.map((liked) => {
+        this.state.likes.map((liked) => {
           axios({
             method: "GET",
             url: "http://localhost:5000/user.post.route/getPost/" + liked,
           })
             .then((response) => {
+              console.log('hello')
               this.setState({ likedPosts: [...this.state.likedPosts, response.data] });
-              console.log(this.state.likedPosts)
             })
             .catch((err) => {
               alert("Error pulling user post data");
@@ -99,7 +100,9 @@ export class PostPage extends Component {
   render() {
 
     return (
+      
       <div>
+        
           <SearchBar />
           {
             this.state.searched ? this.state.search.reverse().map((post) => (
@@ -127,6 +130,7 @@ export class PostPage extends Component {
             ))
           }
       </div>
+    
     );
 
   }
