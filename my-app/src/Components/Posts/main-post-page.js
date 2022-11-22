@@ -21,7 +21,7 @@ export class PostPage extends Component {
 
       if (this.state.posts) {
       this.state.posts.map((post) => {
-        if (post.postTitle === this.state.searched) {
+        if (post.postTitle.match(this.state.searched)) {
           this.state.search.push(post);
         }
       })

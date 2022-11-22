@@ -73,9 +73,19 @@ router.route('/getUserPosts/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+let testArray = [];
+
 router.route('/getUserLikedPosts/:userId').get((req, res) => {
+  testArray = [];
   User.UserCollection.findById(req.params.userId)
-  .then(user => res.send(user.likedPosts))
+  .then(user => {
+    user.likedPosts.map((liked) => {
+      usersPost.UserPostCollection.findById(liked)
+    .then((usersposts) => { testArray.push(usersposts) })
+    .catch((err) => res.status(400).json("Error: " + err));
+    })
+    res.send(testArray)
+  })
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
