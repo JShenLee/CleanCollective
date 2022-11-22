@@ -73,21 +73,25 @@ router.route('/getUserPosts/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-let testArray = [];
 
 router.route('/getUserLikedPosts/:userId').get((req, res) => {
-  testArray = [];
+
   User.UserCollection.findById(req.params.userId)
   .then(user => {
-    user.likedPosts.map((liked) => {
-      usersPost.UserPostCollection.findById(liked)
-    .then((usersposts) => { testArray.push(usersposts) })
-    .catch((err) => res.status(400).json("Error: " + err));
+    //find user by id
+      //map liked posts
+      usersPost.UserPostCollection.find({'id': {$in: user.likedPosts}}, function (err,liked){
+      if(err){
+      console.log(err);
+      }else{
+        console.log(liked);
+        res.json(liked);
+      }
     })
-    res.send(testArray)
+  }).catch(err => res.status(400).json('Error: ' + err));
   })
-  .catch(err => res.status(400).json('Error: ' + err));
-});
+  
+
 
 
 router.route('/getUserSavedPosts/:userId').get((req, res) => {
@@ -173,41 +177,6 @@ router
     })
   })
 
-  //const companyName = req.body.postUserName;
-  //Find the User object that has this name
-  // User.User.find({ name: req.body.user })
-  // .then(function (user) {
-  //   //if returned, assign  that object to thisUser
-  //   console.log("User Found: " + user);
-  //   const newUserPost = new Company({
-  //     companyName: companyName,
-  //     //Make this part of the company
-  //     user: user[0],
-  //   });
-  //   newUserPost
-  //     .save()
-  //     .then(() => res.json("User post added!" + user))
-  //     .catch((err) => res.status(400).json("Error: " + err));
-  // })
-  // .catch((err) => res.status(400).json("Error: " + err));
-  // });
-  //
-  // Old methods copy pasted from Students.
-  //They will need to be updated to use Atlas clusters.
-  // UPDATE student
-  // router
-  //   .route("/update-user.post/:id")
-  //   // Get Single Student
-  //   .get((req, res) => {
-  //     usersPost.userPostSchema.findById(req.params.id, (error, data) => {
-  //       if (error) {
-  //         return next(error);
-  //       } else {
-  //         res.json(data);
-  //       }
-  //     });
-  //   })
-
   // Update Student Data
   .put((req, res, next) => {
     usersPost.UserPostCollection.findByIdAndUpdate(
@@ -229,14 +198,12 @@ router
 
 // Delete user post
 
-
 router.route("/delete-user.post/:id/:userId").post((req, res, next) => {
   //delete the post document. 
   usersPost.UserPostCollection.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       return next(error);
     } else {
-
 
     User.UserCollection.findById(req.params.userId)
     .then(user => { 
