@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/CleanCollective/static/css/main.13e28d63.css",
+    "main.js": "/CleanCollective/static/js/main.8ef450eb.js",
+    "static/js/787.bd00bb13.chunk.js": "/CleanCollective/static/js/787.bd00bb13.chunk.js",
+    "static/media/clean.jpg": "/CleanCollective/static/media/clean.ab24b69cbdd59ec3257f.jpg",
+    "static/media/tree.jpg": "/CleanCollective/static/media/tree.13d9b3efe6856234b98e.jpg",
+    "static/media/user-registration.jpg": "/CleanCollective/static/media/user-registration.7ede4673780954ae42f3.jpg",
+    "static/media/user-login.jpg": "/CleanCollective/static/media/user-login.1804f00bf2c15c3485c9.jpg",
+    "static/media/field.jpg": "/CleanCollective/static/media/field.c6c5749d874d1b486234.jpg",
+    "static/media/landingPage.jpg": "/CleanCollective/static/media/landingPage.4738150f9a79a815540e.jpg",
+    "static/media/gradient.jpg": "/CleanCollective/static/media/gradient.f2b2df822eed80ca1a59.jpg",
+    "static/media/CCLogo.png": "/CleanCollective/static/media/CCLogo.207ae4ddb5f142daad5a.png",
+    "static/media/logoOnly.png": "/CleanCollective/static/media/logoOnly.ead0861ab7f137255346.png",
+    "index.html": "/CleanCollective/index.html",
+    "main.13e28d63.css.map": "/CleanCollective/static/css/main.13e28d63.css.map",
+    "main.8ef450eb.js.map": "/CleanCollective/static/js/main.8ef450eb.js.map",
+    "787.bd00bb13.chunk.js.map": "/CleanCollective/static/js/787.bd00bb13.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.13e28d63.css",
+    "static/js/main.8ef450eb.js"
+  ]
+}
